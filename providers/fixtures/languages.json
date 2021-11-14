@@ -1,0 +1,18 @@
+[
+  {
+    "model": "providers.language",
+    "pk": 1,
+    "fields": {
+      "name": "Spanish",
+      "code": "es"
+    }
+  },
+  {
+    "model": "providers.language",
+    "pk": 2,
+    "fields": {
+      "name": "English",
+      "code": "en"
+    }
+  }
+]

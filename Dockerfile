@@ -17,7 +17,7 @@ COPY . $APP_HOME
 WORKDIR $APP_HOME
 
 # Install dependencies
-RUN apt-get update -y && apt-get install postgresql-client -y
+RUN apt-get update -y && apt-get install libgdal-dev g++ postgresql-client -y
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt --no-cache
 

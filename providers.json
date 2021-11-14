@@ -1,0 +1,50 @@
+[
+  {
+    "model": "providers.language",
+    "pk": 1,
+    "fields": {
+      "name": "Spanish",
+      "code": "es"
+    }
+  },
+  {
+    "model": "providers.language",
+    "pk": 2,
+    "fields": {
+      "name": "English",
+      "code": "en"
+    }
+  },
+  {
+    "model": "providers.currency",
+    "pk": 1,
+    "fields": {
+      "name": "United States dollar",
+      "code": "USD"
+    }
+  },
+  {
+    "model": "providers.currency",
+    "pk": 2,
+    "fields": {
+      "name": "Euro",
+      "code": "EUR"
+    }
+  },
+  {
+    "model": "providers.currency",
+    "pk": 3,
+    "fields": {
+      "name": "Pound sterling",
+      "code": "GBP"
+    }
+  },
+  {
+    "model": "providers.currency",
+    "pk": 4,
+    "fields": {
+      "name": "Canadian dollar",
+      "code": "CAD"
+    }
+  }
+]
