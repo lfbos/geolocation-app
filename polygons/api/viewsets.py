@@ -1,9 +1,9 @@
-from rest_framework import viewsets
-
-from polygons.api.serializers import ServiceAreaSerializer
+from polygons.api.serializers import ServiceAreaSerializer, ServiceAreaReadSerializer
 from polygons.models import ServiceArea
+from utils.viewsets import BaseViewSet
 
 
-class ServiceAreaViewSet(viewsets.ModelViewSet):
-    queryset = ServiceArea.objects.all()
-    serializer_class = ServiceAreaSerializer
+class ServiceAreaViewSet(BaseViewSet):
+    queryset = ServiceArea.objects.select_related("provider__language", "provider__currency").all()
+    serializer_classes = {"list": ServiceAreaReadSerializer, "retrieve": ServiceAreaReadSerializer}
+    default_serializer_class = ServiceAreaSerializer

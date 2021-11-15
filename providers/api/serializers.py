@@ -22,3 +22,12 @@ class ProviderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Provider
         fields = ("id", "name", "phone_number", "language", "currency")
+
+
+class ProviderReadSerializer(serializers.ModelSerializer):
+    language = LanguageSerializer()
+    currency = CurrencySerializer()
+
+    class Meta:
+        model = Provider
+        fields = ("id", "name", "phone_number", "language", "currency")

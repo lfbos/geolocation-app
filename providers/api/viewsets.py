@@ -1,9 +1,13 @@
 from rest_framework.filters import SearchFilter
-from rest_framework.viewsets import ModelViewSet
 
-from providers.api.serializers import LanguageSerializer, CurrencySerializer, ProviderSerializer
+from providers.api.serializers import (
+    LanguageSerializer,
+    CurrencySerializer,
+    ProviderSerializer,
+    ProviderReadSerializer,
+)
 from providers.models import Language, Currency, Provider
-from utils.viewsets import CachedListAPIView
+from utils.viewsets import CachedListAPIView, BaseViewSet
 
 
 class LanguageAPIView(CachedListAPIView):
@@ -12,6 +16,7 @@ class LanguageAPIView(CachedListAPIView):
     permission_classes = []
     filter_backends = (SearchFilter,)
     search_fields = ("name",)
+    pagination_class = None
 
 
 class CurrencyAPIView(CachedListAPIView):
@@ -20,8 +25,10 @@ class CurrencyAPIView(CachedListAPIView):
     permission_classes = []
     filter_backends = (SearchFilter,)
     search_fields = ("name",)
+    pagination_class = None
 
 
-class ProviderViewSet(ModelViewSet):
-    queryset = Provider.objects.all()
-    serializer_class = ProviderSerializer
+class ProviderViewSet(BaseViewSet):
+    queryset = Provider.objects.select_related("language", "currency").all()
+    serializer_classes = {"list": ProviderReadSerializer, "retrieve": ProviderReadSerializer}
+    default_serializer_class = ProviderSerializer
