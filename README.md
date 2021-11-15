@@ -8,6 +8,7 @@ Simple app to manage service areas for providers
 4. Once the docker-compose finished, run this command to prepare the app: 
 `docker-compose exec app sh prepare.sh`
 5. Now you can verify if the service is running visiting this url: http://localhost:8080
+6. Check the API docs visiting this url http://localhost:8080/api/schema/swagger-ui/#/ or http://localhost:8080/api/schema/redoc/ 
 
 ### Run test with coverage
 Run test using coverage and save results in local coverage db
