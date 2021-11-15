@@ -31,23 +31,20 @@ class Currency(models.Model):
 
 
 class Provider(CommonInfo):
-    name = models.CharField(
-        max_length=128,
-        verbose_name='provider name'
-    )
+    name = models.CharField(max_length=128, verbose_name="provider name")
     email = models.EmailField(
         unique=True,
         error_messages={
             "unique": "A provider with that email already exists.",
         },
-        verbose_name="email address"
+        verbose_name="email address",
     )
-    phone_number = PhoneNumberField(verbose_name='phone number')
+    phone_number = PhoneNumberField(verbose_name="phone number")
     language = models.ForeignKey(
-        'Language', related_name='providers', null=True, on_delete=models.SET_NULL
+        "Language", related_name="providers", null=True, on_delete=models.SET_NULL
     )
     currency = models.ForeignKey(
-        'Currency', related_name='providers', null=True, on_delete=models.SET_NULL
+        "Currency", related_name="providers", null=True, on_delete=models.SET_NULL
     )
 
     class Meta:
