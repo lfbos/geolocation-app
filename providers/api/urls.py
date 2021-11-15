@@ -15,6 +15,6 @@ app_name = "api_providers"
 router.register(r"", ProviderViewSet, basename="provider")
 
 urlpatterns = [
-    path("languages", LanguageAPIView.as_view()),
-    path("currencies", CurrencyAPIView.as_view()),
+    path("languages", LanguageAPIView.as_view(), name="languages"),
+    path("currencies", CurrencyAPIView.as_view(), name="currencies"),
 ] + router.urls

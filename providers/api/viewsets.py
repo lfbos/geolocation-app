@@ -29,6 +29,6 @@ class CurrencyAPIView(CachedListAPIView):
 
 
 class ProviderViewSet(BaseViewSet):
-    queryset = Provider.objects.select_related("language", "currency").all()
+    queryset = Provider.objects.select_related("language", "currency").order_by("-created_at")
     serializer_classes = {"list": ProviderReadSerializer, "retrieve": ProviderReadSerializer}
     default_serializer_class = ProviderSerializer
