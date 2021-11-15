@@ -8,7 +8,7 @@ from rest_framework.viewsets import ModelViewSet
 class CachedListAPIView(ListAPIView):
     @method_decorator(cache_page(settings.CACHE_TTL))
     def list(self, request, *args, **kwargs):
-        return super(CachedListAPIView, self).list(request, *args, **kwargs)
+        return super().list(request, *args, **kwargs)
 
 
 class BaseViewSet(ModelViewSet):
