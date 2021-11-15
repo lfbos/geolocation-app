@@ -1,0 +1,21 @@
+name: Continuous integration and delivery
+
+on: [push]
+
+jobs:
+  test:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build stack
+        run: docker-compose up -d
+      - name: Run tests with coverage
+        run: docker-compose exec app coverage run --source='.' manage.py test
+      - name: Generate coverage report
+        run: docker-compose exec app coverage html
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage-report
+          path: htmlcov/index.html
