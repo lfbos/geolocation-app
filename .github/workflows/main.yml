@@ -28,7 +28,7 @@ jobs:
       - name: Build stack
         run: docker-compose up -d
       - name: Prepare data
-        run: docker-compose exec app sh prepare.sh
+        run: docker-compose exec -T app sh prepare.sh
       - name: Run tests with coverage
         run: docker-compose exec app coverage run --source='.' manage.py test
       - name: Generate coverage report
