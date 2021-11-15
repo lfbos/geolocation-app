@@ -4,12 +4,31 @@ on: [push]
 
 jobs:
   test:
-    name: Build Docker Image
+    name: Test & coverage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Create .env file
+        run: |
+          touch .env
+          echo DJANGO_ALLOWED_HOSTS="*" >> .env
+          echo SECRET_KEY=${{ github.sha }} >> .env
+          echo DEBUG="True" >> .env
+          echo POSTGRES_USER="postgres" >> .env
+          echo POSTGRES_PASSWORD="1234" >> .env
+          echo POSTGRES_DB="postgres" >> .env
+          echo POSTGRES_HOST="db" >> .env
+          echo POSTGRES_PORT="5432" >> .env
+          echo AWS_S3_REGION_NAME=${{ secrets.AWS_S3_REGION_NAME }} >> .env
+          echo AWS_STORAGE_BUCKET_NAME=${{ secrets.AWS_STORAGE_BUCKET_NAME }} >> .env
+          echo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} >> .env
+          echo AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> .env
+          echo REDIS_URL="redis://redis:6379" >> .env
+          cat .env
       - name: Build stack
         run: docker-compose up -d
+      - name: Prepare data
+        run: docker-compose exec app sh prepare.sh
       - name: Run tests with coverage
         run: docker-compose exec app coverage run --source='.' manage.py test
       - name: Generate coverage report

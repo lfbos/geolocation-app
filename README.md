@@ -5,7 +5,9 @@ Simple app to manage service areas for providers
 1. Install docker and docker compose
 2. Create an `.env` file, check .env.example to see what variables are necessary to run the app
 3. Run the app using docker-compose: `docker-compose up -d`
-4. Now you can verify if the service is running visiting this url: http://localhost:8080
+4. Once the docker-compose finished, run this command to prepare the app: 
+`docker-compose exec app sh prepare.sh`
+5. Now you can verify if the service is running visiting this url: http://localhost:8080
 
 ### Run test with coverage
 Run test using coverage and save results in local coverage db
