@@ -12,8 +12,10 @@ python manage.py migrate --noinput
 python manage.py loaddata languages.json
 python manage.py loaddata currencies.json
 
-# Create superuser
-python manage.py createadmin --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL --password $DJANGO_SUPERUSER_PASSWORD
+if [ "$DJANGO_SUPERUSER_USERNAME" ]; then
+  # Create superuser
+  python manage.py createadmin --username $DJANGO_SUPERUSER_USERNAME --email $DJANGO_SUPERUSER_EMAIL --password $DJANGO_SUPERUSER_PASSWORD
+fi
 
 # Collect static files
 python manage.py collectstatic --no-input

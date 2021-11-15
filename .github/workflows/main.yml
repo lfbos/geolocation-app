@@ -30,9 +30,9 @@ jobs:
       - name: Prepare data
         run: docker-compose exec -T app sh prepare.sh
       - name: Run tests with coverage
-        run: docker-compose exec app coverage run --source='.' manage.py test
+        run: docker-compose exec -T app coverage run --source='.' manage.py test
       - name: Generate coverage report
-        run: docker-compose exec app coverage html
+        run: docker-compose exec -T app coverage html
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
