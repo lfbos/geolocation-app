@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  geolocation:
+  app:
     build: .
     env_file: .env
     ports:
