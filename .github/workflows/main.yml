@@ -39,6 +39,7 @@ jobs:
           name: code-coverage-report
           path: htmlcov
   prepare:
+    needs: test
     name: Build & prepare data
     runs-on: ubuntu-latest
     steps:
@@ -82,4 +83,4 @@ jobs:
           cat .env
 
       - name: Prepare data
-        run: docker run --env-file=.env -it $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG sh prepare.sh
+        run: docker run --env-file=.env $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG sh prepare.sh
