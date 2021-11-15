@@ -8,6 +8,7 @@ services:
       - "8080:8080"
     depends_on:
       - db
+      - redis
     volumes:
       - ./:/home/app/web
 
@@ -20,6 +21,9 @@ services:
     volumes:
       - /var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock
       - db-volume:/var/lib/postgresql/data
+
+  redis:
+    image: redis
 
 volumes:
   data-volume:

@@ -1,4 +1,4 @@
-FROM python:3.8-slim
+FROM python:3.8
 MAINTAINER Luis Boscan <lboscannava@gmail.com>
 
 # Set environment variables
@@ -17,7 +17,8 @@ COPY . $APP_HOME
 WORKDIR $APP_HOME
 
 # Install dependencies
-RUN apt-get update -y && apt-get install libgdal-dev g++ postgresql-client -y
+RUN apt-get update -y && apt-get install gdal-bin libgdal-dev python3-gdal binutils libproj-dev postgresql-client -y
+
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt --no-cache
 
