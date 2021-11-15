@@ -62,7 +62,8 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t geo-app .
+          docker tag geo-app $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
       - name: Create .env file
@@ -83,4 +84,4 @@ jobs:
           cat .env
 
       - name: Prepare data
-        run: docker run --env-file=.env -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG sh prepare.sh
+        run: docker run --env-file=.env -t geo-app sh prepare.sh
